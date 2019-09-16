@@ -44,7 +44,7 @@ public class AuthorizeController {
         accessTokenDTO.setClient_secret(clientSecret);
         String acessToken = githubProvider.getAcessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(acessToken);
-        if(githubUser !=null){
+        if(githubUser !=null && githubUser.getId()!=null){//基本数据类型不能和null进行！=比较，使用包装类null即可，学到了
             //登录成功，创建user并插入
             User user=new User();
             user.setName(githubUser.getName());

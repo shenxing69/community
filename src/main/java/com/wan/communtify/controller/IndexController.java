@@ -3,10 +3,8 @@ package com.wan.communtify.controller;
 import com.wan.communtify.mapper.Usermapper;
 import com.wan.communtify.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
