@@ -31,8 +31,8 @@ public class QuestionService {
             totalPage=totalCount/size +1;
         }
 
-        if(page<1){page=1;}
         if(page>totalPage){page=totalPage;}
+        if(page<1){page=1;}
         paginationDTO.setPagination(totalPage,page);
         Integer offset=size*(page-1);
         //尝试使用联合查询代替循环赋值，P23
@@ -62,8 +62,9 @@ public class QuestionService {
             totalPage=totalCount/size +1;
         }
 
-        if(page<1){page=1;}
+
         if(page>totalPage){page=totalPage;}
+        if(page<1){page=1;}
         paginationDTO.setPagination(totalPage,page);
         Integer offset=size*(page-1);
 

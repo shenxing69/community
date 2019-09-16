@@ -19,8 +19,8 @@ public class PaginationDTO {
     public void setPagination(Integer totalPage, Integer page) {
         this.totalPage=totalPage;
 
-        if(page<1){page=1;}
         if(page>totalPage){page=totalPage;}
+        if(page<1){page=1;}
         this.page=page;
         pages.add(page);
         for(int i=1;i<4;i++){
