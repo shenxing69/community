@@ -5,6 +5,7 @@ import com.wan.communtify.dto.GithubUser;
 import com.wan.communtify.mapper.Usermapper;
 import com.wan.communtify.model.User;
 import com.wan.communtify.provider.GithubProvider;
+import com.wan.communtify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,11 +31,12 @@ public class AuthorizeController {
 
     @Autowired
     private Usermapper usermapper;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code")String code,
                            @RequestParam(name="state")String state,
-                            HttpServletRequest request,
                            HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
@@ -51,17 +53,23 @@ public class AuthorizeController {
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmt_create(System.currentTimeMillis());
-            user.setGmt_modified(user.getGmt_create());
+
             user.setAvatarUrl(githubUser.getAvatarUrl());
-            usermapper.insert(user);
+            userService.createOrUpdate(user);
             //创建自定义cookies
             response.addCookie(new Cookie("token",token));
-            //登陆成功,写cookie和session
-            request.getSession().setAttribute("user",githubUser);
             return "redirect:/";
         }else{
             return "redirect:/";
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response){
+        //退出登录，删除session和cookie
+        request.getSession().removeAttribute("user");
+        Cookie cookie=new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }
