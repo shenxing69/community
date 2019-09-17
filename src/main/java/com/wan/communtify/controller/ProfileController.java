@@ -25,20 +25,8 @@ public class ProfileController {
     public String profile(@PathVariable(name="action")String action, Model model, HttpServletRequest request,
                           @RequestParam(name="page",defaultValue = "1")Integer page,
                           @RequestParam(name="size",defaultValue = "5")Integer size){
-        User user=null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null&&cookies.length!=0){
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals("token")){
-                    String token=cookie.getValue();
-                    user=usermapper.findByToken(token);
-                    if(user !=null){
-                        request.getSession().setAttribute("user",user);
-                    }
-                    break;
-                }
-            }
-        }
+        User user=(User)request.getSession().getAttribute("user");
+
         if(user==null){
             return "redirect:/";
         }
