@@ -1,6 +1,7 @@
 package com.wan.communtify.mapper;
 
 
+import com.wan.communtify.dto.QuestionDTO;
 import com.wan.communtify.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,4 +22,6 @@ public interface QuestionMapper {
     List<Question> listByUerId(@Param("userId")int userId, @Param("offset")Integer offset, @Param("size")Integer size);
     @Select("select count(1)  from question where creator=#{userId}")
     Integer countByuserId(int userId);
+    @Select("select * from question where id=#{id}")
+    Question findById(Integer id);
 }
