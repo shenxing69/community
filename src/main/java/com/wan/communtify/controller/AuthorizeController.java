@@ -2,7 +2,7 @@ package com.wan.communtify.controller;
 
 import com.wan.communtify.dto.AccessTokenDTO;
 import com.wan.communtify.dto.GithubUser;
-import com.wan.communtify.mapper.Usermapper;
+import com.wan.communtify.mapper.UserMapper;
 import com.wan.communtify.model.User;
 import com.wan.communtify.provider.GithubProvider;
 import com.wan.communtify.service.UserService;
@@ -30,7 +30,7 @@ public class AuthorizeController {
     private String clientUri;
 
     @Autowired
-    private Usermapper usermapper;
+    private UserMapper usermapper;
     @Autowired
     private UserService userService;
 
