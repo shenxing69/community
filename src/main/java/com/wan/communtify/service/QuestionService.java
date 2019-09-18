@@ -4,6 +4,7 @@ import com.wan.communtify.dto.PaginationDTO;
 import com.wan.communtify.dto.QuestionDTO;
 import com.wan.communtify.exception.CustomizeErrorCode;
 import com.wan.communtify.exception.CustomizeException;
+import com.wan.communtify.mapper.QuestionExtMapper;
 import com.wan.communtify.mapper.QuestionMapper;
 import com.wan.communtify.mapper.UserMapper;
 import com.wan.communtify.model.Question;
@@ -23,6 +24,10 @@ public class QuestionService {
     private UserMapper usermapper;
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
+
     public PaginationDTO list(Integer page, Integer size) {
 
         PaginationDTO paginationDTO=new PaginationDTO();
@@ -124,5 +129,12 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    public void incView(Integer id) {
+        Question record=new Question();
+        record.setId(id);
+        record.setViewCount(1);
+        questionExtMapper.incView(record);
     }
 }
