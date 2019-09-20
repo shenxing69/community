@@ -2,9 +2,11 @@ package com.wan.communtify.exception;
 
 public class CustomizeException extends RuntimeException {
     private String message;
+    private Integer code;
 
-    public CustomizeException(ICustomizeErrorCode errorCode){
-        this.message=errorCode.getMessage();
+    public CustomizeException(ICustomizeErrorCode errorCode) {
+        this.code = errorCode.getCode();
+        this.message = errorCode.getMessage();
     }
 
     @Override
@@ -12,7 +14,7 @@ public class CustomizeException extends RuntimeException {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public Integer getCode() {
+        return code;
     }
 }

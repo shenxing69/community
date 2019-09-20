@@ -18,4 +18,10 @@
     View_COUNT = view_COUNT + #{viewCount,jdbcType=INTEGER}
     where id = #{id}
   </update>
+  <update id="incCommentCount" parameterType="com.wan.communtify.model.Question">
+    update question
+    set
+    comment_COUNT = comment_COUNT + #{commentCount,jdbcType=INTEGER}
+    where id = #{id}
+  </update>
 </mapper>

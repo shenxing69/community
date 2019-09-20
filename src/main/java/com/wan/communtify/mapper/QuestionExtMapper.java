@@ -6,4 +6,5 @@ import com.wan.communtify.model.Question;
 public interface QuestionExtMapper {
     int incView(Question record);
 
+    void incCommentCount(Question question);
 }
